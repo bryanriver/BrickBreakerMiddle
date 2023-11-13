@@ -6,7 +6,7 @@ signal life_lost
 
 const VELCOCITY_LIMIT = 40
 
-@export var ball_speed = 20
+@export var ball_speed = 15
 @export var lives = 3
 @export var death_zone: DeathZone
 @export var ui: UI
@@ -27,6 +27,10 @@ func  _physics_process(delta):
 	var collision = move_and_collide(velocity * ball_speed * delta)
 	if (!collision):
 		return
+		
+	var collider = collision.get_collider()
+	if collider is Brick:
+		collider.decrease_level()
 		
 	velocity = velocity.bounce(collision.get_normal())
 	
