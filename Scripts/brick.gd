@@ -19,7 +19,7 @@ var sprites: Array[Texture2D] = [
 ]
 
 func get_size():
-	return collision_shape_2d.shape.get_rect().size
+	return collision_shape_2d.shape.get_rect().size * sprite_2d.scale
 	
 	
 func set_level(new_level: int):
@@ -36,7 +36,7 @@ func decrease_level():
 func fade_out():
 	collision_shape_2d.disabled = true
 	var tween = get_tree().create_tween()
-	tween.tween_property(sprite_2d, "modualate", Color.TRANSPARENT, .5)
+	tween.tween_property(sprite_2d, "modulate", Color.TRANSPARENT, .5)
 	tween.tween_callback(destroy)
 	
 func destroy():
