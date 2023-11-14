@@ -17,11 +17,14 @@
 [node name="Paddle" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_d25i7")]
 position = Vector2(0, 283)
 collision_layer = 2
+speed = null
 camera = NodePath("../Camera2D")
 
 [node name="Ball" parent="." node_paths=PackedStringArray("death_zone", "ui") instance=ExtResource("2_f0eid")]
 position = Vector2(0, 152)
 collision_mask = 14
+ball_speed = null
+lives = null
 death_zone = NodePath("../DeathZone")
 ui = NodePath("../UI")
 
