@@ -9,29 +9,27 @@ var level = 1
 @onready var sprite_2d = $Sprite2D
 @onready var collision_shape_2d = $CollisionShape2D
 
-var sprites: Array[Texture2D] = [
-	preload("res://Assets/Brick-Yellow.png"),
+var  sprites: Array[Texture2D] = [
 	preload("res://Assets/Brick-Blue.png"),
-	preload("res://Assets/Brick-Orange.png"),
-	preload("res://Assets/Brick-Green.png"),
 	preload("res://Assets/Brick-Gray.png"),
+	preload("res://Assets/Brick-Green.png"),
+	preload("res://Assets/Brick-Orange.png"),
 	preload("res://Assets/Brick-Red.png"),
+	preload("res://Assets/Brick-Yellow.png")
 ]
 
 func get_size():
 	return collision_shape_2d.shape.get_rect().size * sprite_2d.scale
 	
-	
 func set_level(new_level: int):
 	level = new_level
-	sprite_2d.texture = sprites[new_level -1]
+	sprite_2d.texture = sprites[new_level - 1]
 	
 func decrease_level():
 	if level > 1:
-		set_level(level -1)
+		set_level(level - 1)
 	else:
 		fade_out()
-		
 		
 func fade_out():
 	collision_shape_2d.disabled = true
@@ -45,4 +43,4 @@ func destroy():
 	
 func get_width():
 	return get_size().x
-	
+
