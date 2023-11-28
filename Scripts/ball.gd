@@ -4,7 +4,7 @@ class_name Ball
 
 signal life_lost 
 
-const VELCOCITY_LIMIT = 40
+const VELOCITY_LIMIT = 40
 
 @export var ball_speed = 15
 @export var lives = 3
@@ -79,5 +79,5 @@ func ball_collision(collider):
 	
 	var speed_multiplier = speed_up_factor if collider is Paddle else 1
 	
-	velocity = (new_velocity * speed_multiplier).limit_length(VELCOCITY_LIMIT)    
+	velocity = (new_velocity * speed_multiplier).limit_length(VELOCITY_LIMIT)   
 
