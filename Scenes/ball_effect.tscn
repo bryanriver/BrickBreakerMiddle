@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://lrcbhmn4h57t"]
+
+[sub_resource type="Gradient" id="Gradient_vxrdf"]
+colors = PackedColorArray(0, 0, 0.623529, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lxm60"]
+gradient = SubResource("Gradient_vxrdf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_17fur"]
+emission_shape = 6
+emission_ring_axis = Vector3(2.08165e-12, 2, 1)
+emission_ring_height = 40.0
+emission_ring_radius = 40.0
+emission_ring_inner_radius = 40.0
+particle_flag_align_y = true
+particle_flag_disable_z = true
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+orbit_velocity_min = 2.08167e-14
+orbit_velocity_max = 2.08167e-14
+radial_accel_min = -88.6
+radial_accel_max = -30.62
+scale_min = 5.0
+scale_max = 5.0
+color_ramp = SubResource("GradientTexture1D_lxm60")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+position = Vector2(874, 279)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_17fur")
+trail_lifetime = 0.01
