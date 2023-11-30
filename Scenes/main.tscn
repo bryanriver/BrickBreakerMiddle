@@ -1,13 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://dl1cs3vnaemdg"]
+[gd_scene load_steps=11 format=3 uid="uid://dl1cs3vnaemdg"]
 
 [ext_resource type="PackedScene" uid="uid://d4f0dh4k7yuix" path="res://Scenes/paddle.tscn" id="1_d25i7"]
 [ext_resource type="PackedScene" uid="uid://bfi0vsbaatnj4" path="res://Scenes/ball.tscn" id="2_f0eid"]
 [ext_resource type="PackedScene" uid="uid://tb5whxdkf7qa" path="res://Scenes/wall.tscn" id="3_leste"]
+[ext_resource type="PackedScene" uid="uid://dghkt1btl22sb" path="res://Scenes/Paddle_effect.tscn" id="3_pp57p"]
 [ext_resource type="PackedScene" uid="uid://lrcbhmn4h57t" path="res://Scenes/ball_effect.tscn" id="4_adh3a"]
 [ext_resource type="PackedScene" uid="uid://dyyxtd3qn6mdi" path="res://Scenes/death_zone.tscn" id="4_jvu0o"]
 [ext_resource type="PackedScene" uid="uid://cthsrqj7moamg" path="res://Scenes/ui.tscn" id="5_3eytw"]
 [ext_resource type="Script" path="res://Scripts/brick_spawner.gd" id="6_am6nt"]
 [ext_resource type="PackedScene" uid="uid://tjpbuvtdyd2a" path="res://Scenes/brick.tscn" id="7_u3jr0"]
+[ext_resource type="AudioStream" uid="uid://ds2vfjtk216cm" path="res://Audio/WaterDrop.wav" id="10_ve6gh"]
 
 [node name="Main" type="Node"]
 
@@ -19,6 +21,9 @@
 position = Vector2(0, 283)
 collision_layer = 2
 camera = NodePath("../Camera2D")
+
+[node name="Rainfall" parent="Paddle" instance=ExtResource("3_pp57p")]
+position = Vector2(-1, 9)
 
 [node name="Ball" parent="." node_paths=PackedStringArray("death_zone", "ui") instance=ExtResource("2_f0eid")]
 position = Vector2(2, 152)
@@ -53,6 +58,13 @@ script = ExtResource("6_am6nt")
 brick_scene = ExtResource("7_u3jr0")
 margin = Vector2(80, 20)
 spawn_start = NodePath("../Marker2D")
+
+[node name="WaterDrop" type="AudioStreamPlayer2D" parent="BrickSpawner"]
+position = Vector2(2, 152)
+scale = Vector2(0.25, 0.25)
+stream = ExtResource("10_ve6gh")
+volume_db = 24.0
+autoplay = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, -250)

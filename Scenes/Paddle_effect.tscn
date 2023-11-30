@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dghkt1btl22sb"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e1of0"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_on6so"]
+emission_shape = 3
+emission_box_extents = Vector3(50, 1, 1)
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color = Color(0.380392, 0.572549, 1, 1)
+color_ramp = SubResource("GradientTexture1D_e1of0")
+
+[node name="Rainfall" type="GPUParticles2D"]
+position = Vector2(1112, 608)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_on6so")
+trail_enabled = true
+trail_sections = 2
+trail_section_subdivisions = 2
