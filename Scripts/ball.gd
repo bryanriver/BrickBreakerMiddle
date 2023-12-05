@@ -7,15 +7,19 @@ signal life_lost
 const VELOCITY_LIMIT = 40
 
 @export var ball_speed = 15
-@export var lives = 3
+@export var lives = 1
 @export var death_zone: DeathZone
 @export var ui: UI
 
-var speed_up_factor = 1.05
+var speed_up_factor = 0.8
 var start_position: Vector2
 var last_collider_id
 
 @onready var collision_shape_2d = $CollisionShape2D
+@onready var ball_hit_paddle = $"../Sounds/BallHitPaddle"
+@onready var game_lost = $"../Sounds/GameLost"
+@onready var ball_hit_wall = $"../Sounds/BallHitWall"
+
 
 func _ready():
 	ui.set_lives(lives)
@@ -30,9 +34,11 @@ func  _physics_process(delta):
 	var collider = collision.get_collider()
 	if collider is Brick:
 		collider.decrease_level()
+		ball_hit_wall.play()
 		
 	if collider is Brick or collider is Paddle:
 		ball_collision(collider)
+		ball_hit_paddle.play()
 		
 	else:
 		velocity = velocity.bounce(collision.get_normal())

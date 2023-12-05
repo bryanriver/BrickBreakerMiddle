@@ -8,7 +8,6 @@ var level = 1
 
 @onready var sprite_2d = $Sprite2D
 @onready var collision_shape_2d = $CollisionShape2D	
-@onready var WaterDrop = $WaterDrop
 
 
 var  sprites: Array[Texture2D] = [
@@ -22,7 +21,6 @@ var  sprites: Array[Texture2D] = [
 
 func get_size():
 	return collision_shape_2d.shape.get_rect().size * sprite_2d.scale
-	WaterDrop.play()
 	
 func set_level(new_level: int):
 	level = new_level

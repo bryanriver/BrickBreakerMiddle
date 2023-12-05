@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dl1cs3vnaemdg"]
+[gd_scene load_steps=14 format=3 uid="uid://dl1cs3vnaemdg"]
 
 [ext_resource type="PackedScene" uid="uid://d4f0dh4k7yuix" path="res://Scenes/paddle.tscn" id="1_d25i7"]
 [ext_resource type="PackedScene" uid="uid://bfi0vsbaatnj4" path="res://Scenes/ball.tscn" id="2_f0eid"]
@@ -9,7 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://cthsrqj7moamg" path="res://Scenes/ui.tscn" id="5_3eytw"]
 [ext_resource type="Script" path="res://Scripts/brick_spawner.gd" id="6_am6nt"]
 [ext_resource type="PackedScene" uid="uid://tjpbuvtdyd2a" path="res://Scenes/brick.tscn" id="7_u3jr0"]
-[ext_resource type="AudioStream" uid="uid://ds2vfjtk216cm" path="res://Audio/WaterDrop.wav" id="10_ve6gh"]
+[ext_resource type="AudioStream" uid="uid://dsvwo6roi77rq" path="res://Audio/BallHitPaddle.wav" id="10_2sul8"]
+[ext_resource type="AudioStream" uid="uid://dn73im0sbqob2" path="res://Audio/BallPastPaddle.wav" id="11_cg7ps"]
+[ext_resource type="AudioStream" uid="uid://b8tl7hrkxmxtn" path="res://Audio/GameLost.mp3" id="12_bs05t"]
+[ext_resource type="AudioStream" uid="uid://bk71occbod6i1" path="res://Audio/BallHitWall.wav" id="13_2nkr3"]
 
 [node name="Main" type="Node"]
 
@@ -59,12 +62,19 @@ brick_scene = ExtResource("7_u3jr0")
 margin = Vector2(80, 20)
 spawn_start = NodePath("../Marker2D")
 
-[node name="WaterDrop" type="AudioStreamPlayer2D" parent="BrickSpawner"]
-position = Vector2(2, 152)
-scale = Vector2(0.25, 0.25)
-stream = ExtResource("10_ve6gh")
-volume_db = 24.0
-autoplay = true
-
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, -250)
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="BallHitPaddle" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("10_2sul8")
+
+[node name="BallPastPaddle" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("11_cg7ps")
+
+[node name="GameLost" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("12_bs05t")
+
+[node name="BallHitWall" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("13_2nkr3")

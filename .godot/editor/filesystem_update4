@@ -5,4 +5,6 @@ res://Scenes/ui.tscn
 res://Scenes/ball.tscn
 res://Scenes/ball_effect.tscn
 res://Scenes/Paddle_effect.tscn
+res://Scripts/level_definitions.gd
+res://Scripts/ball.gd
 res://Scripts/brick.gd
