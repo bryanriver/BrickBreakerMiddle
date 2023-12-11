@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dl1cs3vnaemdg"]
+[gd_scene load_steps=16 format=3 uid="uid://dl1cs3vnaemdg"]
 
 [ext_resource type="PackedScene" uid="uid://d4f0dh4k7yuix" path="res://Scenes/paddle.tscn" id="1_d25i7"]
 [ext_resource type="PackedScene" uid="uid://bfi0vsbaatnj4" path="res://Scenes/ball.tscn" id="2_f0eid"]
@@ -8,11 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://dyyxtd3qn6mdi" path="res://Scenes/death_zone.tscn" id="4_jvu0o"]
 [ext_resource type="PackedScene" uid="uid://cthsrqj7moamg" path="res://Scenes/ui.tscn" id="5_3eytw"]
 [ext_resource type="Script" path="res://Scripts/brick_spawner.gd" id="6_am6nt"]
+[ext_resource type="Script" path="res://Scenes/Walls.gd" id="6_g1toc"]
 [ext_resource type="PackedScene" uid="uid://tjpbuvtdyd2a" path="res://Scenes/brick.tscn" id="7_u3jr0"]
 [ext_resource type="AudioStream" uid="uid://dsvwo6roi77rq" path="res://Audio/BallHitPaddle.wav" id="10_2sul8"]
 [ext_resource type="AudioStream" uid="uid://dn73im0sbqob2" path="res://Audio/BallPastPaddle.wav" id="11_cg7ps"]
 [ext_resource type="AudioStream" uid="uid://b8tl7hrkxmxtn" path="res://Audio/GameLost.mp3" id="12_bs05t"]
 [ext_resource type="AudioStream" uid="uid://bk71occbod6i1" path="res://Audio/BallHitWall.wav" id="13_2nkr3"]
+[ext_resource type="AudioStream" uid="uid://bfvg0bc16nd2a" path="res://Audio/GameWon.wav" id="14_rfeg8"]
 
 [node name="Main" type="Node"]
 
@@ -21,7 +23,7 @@
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Paddle" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_d25i7")]
-position = Vector2(0, 283)
+position = Vector2(1, 260)
 collision_layer = 2
 camera = NodePath("../Camera2D")
 
@@ -38,6 +40,7 @@ ui = NodePath("../UI")
 position = Vector2(0, 0)
 
 [node name="Walls" type="Node" parent="."]
+script = ExtResource("6_g1toc")
 
 [node name="UpperWall" parent="Walls" instance=ExtResource("3_leste")]
 position = Vector2(0, -334)
@@ -54,7 +57,7 @@ rotation = 1.5708
 collision_layer = 4
 
 [node name="DeathZone" parent="." instance=ExtResource("4_jvu0o")]
-position = Vector2(0, 393)
+position = Vector2(1, 303)
 
 [node name="BrickSpawner" type="Node" parent="." node_paths=PackedStringArray("spawn_start")]
 script = ExtResource("6_am6nt")
@@ -78,3 +81,6 @@ stream = ExtResource("12_bs05t")
 
 [node name="BallHitWall" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("13_2nkr3")
+
+[node name="GameWon" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("14_rfeg8")

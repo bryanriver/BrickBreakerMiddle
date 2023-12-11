@@ -4,10 +4,10 @@ class_name Ball
 
 signal life_lost 
 
-const VELOCITY_LIMIT = 40
+const VELOCITY_LIMIT = 30
 
-@export var ball_speed = 15
-@export var lives = 1
+@export var ball_speed = 20
+@export var lives = 50
 @export var death_zone: DeathZone
 @export var ui: UI
 
@@ -19,12 +19,14 @@ var last_collider_id
 @onready var ball_hit_paddle = $"../Sounds/BallHitPaddle"
 @onready var game_lost = $"../Sounds/GameLost"
 @onready var ball_hit_wall = $"../Sounds/BallHitWall"
+@onready var game_won = $"../Sounds/GameWon"
 
 
 func _ready():
 	ui.set_lives(lives)
 	start_position = position
 	death_zone.life_lost.connect(on_life_lost)
+	
 	
 func  _physics_process(delta):
 	var collision = move_and_collide(velocity * ball_speed * delta)
@@ -34,7 +36,6 @@ func  _physics_process(delta):
 	var collider = collision.get_collider()
 	if collider is Brick:
 		collider.decrease_level()
-		ball_hit_wall.play()
 		
 	if collider is Brick or collider is Paddle:
 		ball_collision(collider)
@@ -53,14 +54,16 @@ func on_life_lost():
 	lives -= 1
 	if lives == 0:
 		ui.game_over()
+		game_lost.play()
 	else:
 		life_lost.emit()
 		reset_ball()
 		ui.set_lives(lives)
+		ball_hit_wall.play()
 		
 func reset_ball():
 	position = start_position  
-	velocity = Vector2.ZERO
+	velocity = Vector2.ZERO	
 	
 func ball_collision(collider):
 	var ball_width = collision_shape_2d.shape.get_rect().size.x
@@ -80,6 +83,7 @@ func ball_collision(collider):
 		new_velocity.x = new_velocity.rotated(deg_to_rad(randf_range(-45, 45))).x * 10
 	else:
 		last_collider_id == collider.get_rid()
+
 		
 	new_velocity.y = sqrt(absf(velocity_xy * velocity_xy - new_velocity.x * new_velocity.x)) *(-1 if velocity.y > 0 else 1)
 	
